@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="www.weimeng.com.meili.MainActivity">
+
+    <RelativeLayout
+        android:id="@+id/home_tag_ll"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:orientation="horizontal"
+        android:background="@color/theme_color"
+        >
+
+        <LinearLayout
+            android:id="@+id/home_head_ll"
+            android:layout_width="255dp"
+            android:layout_height="30dp"
+            android:layout_centerVertical="true"
+            android:background="@drawable/sousuo_ll_shape"
+            android:layout_marginLeft="20dp"
+            >
+
+            <ImageView
+                android:id="@+id/home_saoyisao_imag"
+                android:layout_width="17dp"
+                android:layout_height="17dp"
+                android:src="@mipmap/sao"
+                android:layout_margin="7dp"
+                />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="搜索问答，美容项目"
+                android:textColor="@color/hint_text"
+                android:layout_marginTop="7dp"
+                />
+
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/home_head_tx"
+            android:layout_toRightOf="@id/home_head_ll"
+            android:layout_width="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_height="20dp"
+            android:layout_margin="5dp"
+            android:textColor="@color/white"
+            android:text="郑州市"
+            android:textSize="15dp"
+            />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@id/home_head_tx"
+            android:background="@mipmap/xiangxai"
+            android:layout_centerVertical="true"
+            />
+    </RelativeLayout>
+
+
+    <FrameLayout
+        android:id="@+id/home_fl"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1.0"
+        >
+
+    </FrameLayout>
+
+    <RadioGroup
+        android:id="@+id/home_rg"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:background="@android:color/background_light"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:layout_marginBottom="5dp"
+        >
+        <RadioButton
+            android:id="@+id/home_home_fragment"
+            style="@style/main_tab_bottom"
+            android:layout_marginTop="2dp"
+            android:drawableTop="@drawable/home_selector"
+            android:textColor="@drawable/color_radiobutton"
+            android:text="首页"
+            />
+
+        <RadioButton
+             android:id="@+id/home_expert_fragment"
+             style="@style/main_tab_bottom"
+             android:layout_marginTop="2dp"
+             android:drawableTop="@drawable/expert_selector"
+             android:textColor="@drawable/color_radiobutton"
+             android:text="专家"
+             />
+
+        <RadioButton
+            android:id="@+id/home_add_fragment"
+            style="@style/main_tab_bottom"
+            android:layout_marginTop="2dp"
+            android:background="@mipmap/meelier"
+            />
+
+
+        <RadioButton
+             android:id="@+id/home_knack_fragment"
+             style="@style/main_tab_bottom"
+             android:layout_marginTop="2dp"
+             android:drawableTop="@drawable/knack_selector"
+             android:textColor="@drawable/color_radiobutton"
+             android:text="宝典"
+             />
+
+         <RadioButton
+             android:id="@+id/home_this_my_fragment"
+             style="@style/main_tab_bottom"
+             android:layout_marginTop="2dp"
+             android:drawableTop="@drawable/this_my_selector"
+             android:textColor="@drawable/color_radiobutton"
+             android:text="我的"
+             />
+
+    </RadioGroup>
+
+</LinearLayout>

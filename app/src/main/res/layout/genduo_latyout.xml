@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" 
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    >
+
+    <RelativeLayout
+        android:id="@+id/home_tag_ll"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:orientation="horizontal"
+        android:background="@color/theme_color"
+        >
+        
+        <ImageView
+            android:id="@+id/genduo_image"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:src="@mipmap/back"
+            android:layout_centerVertical="true"
+            android:layout_margin="10dp"
+            />
+
+        <LinearLayout
+            android:id="@+id/home_head_ll"
+            android:layout_width="255dp"
+            android:layout_height="30dp"
+            android:layout_centerVertical="true"
+            android:background="@drawable/sousuo_ll_shape"
+            android:layout_marginLeft="40dp"
+            >
+
+            <ImageView
+                android:id="@+id/home_saoyisao_imag"
+                android:layout_width="17dp"
+                android:layout_height="17dp"
+                android:src="@mipmap/sao"
+                android:layout_margin="7dp"
+                />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="搜索问答，美容项目"
+                android:textColor="@color/hint_text"
+                android:layout_marginTop="7dp"
+                />
+
+        </LinearLayout>
+    </RelativeLayout>
+
+
+    <android.support.design.widget.TabLayout
+        android:id="@+id/tab_FindFragment_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        app:tabIndicatorColor="@color/theme_color"
+        app:tabSelectedTextColor="@color/theme_color"
+        app:tabTextColor="@color/text1"
+        />
+
+
+    <android.support.v4.view.ViewPager
+        android:id="@+id/vp_FindFragment_pager"
+        android:layout_width="fill_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        />
+
+
+</LinearLayout>

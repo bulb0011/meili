@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    >
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        >
+
+        <ImageView
+            android:id="@+id/image_heaaaaaaaa"
+            android:layout_width="15dp"
+            android:layout_height="15dp"
+            android:background="@mipmap/j"
+            />
+
+        <TextView
+            android:id="@+id/dfdfinpehnxlmhnj"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:layout_toRightOf="@id/image_heaaaaaaaa"
+            />
+
+    </RelativeLayout>
+
+    <www.weimeng.com.meili.view.TagFlowLayout
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/expert_fl"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:max_select="-1"
+        app:auto_select_effect="true"
+        >
+    </www.weimeng.com.meili.view.TagFlowLayout>
+
+</LinearLayout>
