@@ -11,12 +11,20 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+import com.google.gson.Gson;
+import com.zhy.http.okhttp.OkHttpUtils;
+import com.zhy.http.okhttp.callback.StringCallback;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
+import okhttp3.Call;
+import okhttp3.OkHttpClient;
 import www.weimeng.com.meili.R;
+import www.weimeng.com.meili.bean.Exp_Data;
+import www.weimeng.com.meili.bean.Exp_list;
+import www.weimeng.com.meili.bean.Exp_root;
 import www.weimeng.com.meili.bean.Expert_Bean;
 import www.weimeng.com.meili.view.FlowLayout_;
 import www.weimeng.com.meili.view.TagAdapter;
@@ -34,6 +42,8 @@ public class Expert_Fragment extends BaseFragment{
     private List<Expert_Bean> list_base;
     private List<String> list;
     private ListView lv;
+    private List<Exp_Data> dada_list;
+    private MyAdapter myAdapter;
 
     @Override
     public View initView() {
@@ -52,6 +62,31 @@ public class Expert_Fragment extends BaseFragment{
     @Override
     public void initData() {
 
+        OkHttpClient client = new OkHttpClient();
+
+        OkHttpUtils
+                //.get()
+                .post()
+                .url("https://wmapi.bilekang.com/index.php?m=home&v=TagList&a=showTagList")
+                //.addParams("token", stt)
+                .build()
+                .execute(new StringCallback()
+                {
+                    @Override
+                    public void onResponse(String response, int id) {
+
+                        analysisJson(response);
+
+                    }
+
+                    @Override
+                    public void onError(Call call, Exception e, int id) {
+
+                    }
+
+
+                });
+
 
 
         list = new ArrayList<>();
@@ -69,7 +104,26 @@ public class Expert_Fragment extends BaseFragment{
 
         }
 
-        MyAdapter myAdapter=new MyAdapter();
+        myAdapter = new MyAdapter();
+
+
+    }
+
+    void  analysisJson(String json){
+
+        Gson gson=new Gson();
+
+        Log.i("dengpao", json);
+
+        Exp_root exp_root=gson.fromJson(json, Exp_root.class);
+
+        dada_list = exp_root.getData();
+
+        for (int i = 0; i < dada_list.size(); i++) {
+
+            Log.i("dengpoa", dada_list.get(i).getTag_name());
+            
+        }
 
         lv.setAdapter(myAdapter);
 
@@ -105,18 +159,22 @@ public class Expert_Fragment extends BaseFragment{
 
             TagFlowLayout tagFlowLayout = (TagFlowLayout)view.findViewById(R.id.expert_fl);
 
+            Log.i("dengpoa", "getView: "+position);
 
-            textView.setText(list_base.get(position).getTv_head());
+            Exp_Data  info =dada_list.get(position);
 
+            textView.setText(info.getTag_name());
 
            Glide.with(ctx).load(list_base.get(position).getImg_head()).placeholder(R.mipmap.j).error(R.mipmap.j).into(imageView);
 
             List<String> list_info=list_base.get(position).getTv_lt();
 
-            tagFlowLayout.setAdapter(new TagAdapter<String>(list_info) {
+            List<Exp_list> exp_lists =info.getList();
+
+            tagFlowLayout.setAdapter(new TagAdapter<Exp_list>(exp_lists) {
 
                 @Override
-                public View getView(FlowLayout_ parent, int position, String o) {
+                public View getView(FlowLayout_ parent, int position, Exp_list o) {
 
                     //mInflater.inflate(ctx,tagFlowLayout,null);
 
@@ -126,13 +184,13 @@ public class Expert_Fragment extends BaseFragment{
 
                     TextView textView=(TextView)view.findViewById(R.id.dzfhjdsdfg);
 
-                    textView.setText(o);
+                    textView.setText(o.getTag_name());
 
                     return view;
                 }
 
                 @Override
-                public boolean setSelected(int position, String o) {
+                public boolean setSelected(int position, Exp_list o) {
 
                     return o.equals("Android");
                 }
