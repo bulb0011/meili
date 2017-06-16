@@ -134,12 +134,12 @@ public class Expert_Fragment extends BaseFragment{
 
         @Override
         public int getCount() {
-            return list_base.size();
+            return dada_list.size();
         }
 
         @Override
         public Object getItem(int position) {
-            return list_base.get(position);
+            return dada_list.get(position);
         }
 
         @Override
@@ -150,26 +150,59 @@ public class Expert_Fragment extends BaseFragment{
         @Override
         public View getView(int position, View convertView, ViewGroup parent) {
 
+            ViewHolder holer=null;
+            View view;
 
-            View view=View.inflate(ctx,R.layout.expert_item_yout,null);
+            if (convertView == null){
 
-            ImageView imageView=(ImageView)view.findViewById(R.id.image_heaaaaaaaa);
+                view=View.inflate(ctx,R.layout.expert_item_yout,null);
+                holer=new ViewHolder(view);
+                view.setTag(holer);
+            }else {
+                view=convertView;
+                holer=(ViewHolder)convertView.getTag();
+            }
 
-            TextView textView=(TextView)view.findViewById(R.id.dfdfinpehnxlmhnj);
+            if (dada_list.size()>position){
 
-            TagFlowLayout tagFlowLayout = (TagFlowLayout)view.findViewById(R.id.expert_fl);
+                Exp_Data info =dada_list.get(position);
 
-            Log.i("dengpoa", "getView: "+position);
+                holer.binData(info,position);
+            }
 
-            Exp_Data  info =dada_list.get(position);
+            return view;
 
-            textView.setText(info.getTag_name());
+            //////
+        }
 
-           Glide.with(ctx).load(list_base.get(position).getImg_head()).placeholder(R.mipmap.j).error(R.mipmap.j).into(imageView);
 
-            List<String> list_info=list_base.get(position).getTv_lt();
 
-            List<Exp_list> exp_lists =info.getList();
+    }
+
+    class ViewHolder{
+
+        public   ImageView imageView;
+        public  TextView textView;
+        public  TagFlowLayout tagFlowLayout;
+        private List<Exp_list> exp_lists;
+
+        ViewHolder(View view){
+
+            imageView = (ImageView)view.findViewById(R.id.image_heaaaaaaaa);
+
+            textView = (TextView)view.findViewById(R.id.dfdfinpehnxlmhnj);
+
+            tagFlowLayout = (TagFlowLayout)view.findViewById(R.id.expert_fl);
+
+        }
+
+        void binData(Exp_Data obj,int position){
+
+            textView.setText(obj.getTag_name());
+
+            Glide.with(ctx).load(list_base.get(position).getImg_head()).placeholder(R.mipmap.j).error(R.mipmap.j).into(imageView);
+
+            exp_lists = obj.getList();
 
             tagFlowLayout.setAdapter(new TagAdapter<Exp_list>(exp_lists) {
 
@@ -202,7 +235,7 @@ public class Expert_Fragment extends BaseFragment{
                 @Override
                 public boolean onTagClick(View view, int position, FlowLayout_ parent) {
 
-                    Log.i("dengpao", Expert_Fragment.this.list.get(position)+"----"+view.getId());
+                    Log.i("dengpao", exp_lists.get(position).getTag_name()+"----"+view.getId());
 
                     return true;
                 }
@@ -217,10 +250,6 @@ public class Expert_Fragment extends BaseFragment{
                 }
             });
 
-
-            return view;
-
-            //////
         }
 
 
