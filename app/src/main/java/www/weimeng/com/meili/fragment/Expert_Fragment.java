@@ -20,7 +20,6 @@ import java.util.List;
 import java.util.Set;
 
 import okhttp3.Call;
-import okhttp3.OkHttpClient;
 import www.weimeng.com.meili.R;
 import www.weimeng.com.meili.bean.Exp_Data;
 import www.weimeng.com.meili.bean.Exp_list;
@@ -62,8 +61,7 @@ public class Expert_Fragment extends BaseFragment{
     @Override
     public void initData() {
 
-        OkHttpClient client = new OkHttpClient();
-
+        //OkHttpClient client = new OkHttpClient();
         OkHttpUtils
                 //.get()
                 .post()

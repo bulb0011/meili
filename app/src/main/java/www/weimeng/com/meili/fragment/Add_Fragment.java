@@ -1,6 +1,7 @@
 package www.weimeng.com.meili.fragment;
 
 import android.content.Intent;
+import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -8,9 +9,15 @@ import android.widget.Toast;
 import com.lzy.imagepicker.ImagePicker;
 import com.lzy.imagepicker.bean.ImageItem;
 import com.lzy.imagepicker.ui.ImageGridActivity;
+import com.zhy.http.okhttp.OkHttpUtils;
+import com.zhy.http.okhttp.callback.StringCallback;
 
+import java.io.File;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
+import okhttp3.Call;
 import www.weimeng.com.meili.R;
 import www.weimeng.com.meili.utils.GlideImageLoader;
 
@@ -56,6 +63,37 @@ public class Add_Fragment extends BaseFragment{
             @Override
             public void onClick(View v) {
 
+                Map<String,File> filie=new HashMap<String, File>();
+
+                ArrayList<File> files = new ArrayList<>();
+                if (imageItems != null && imageItems.size() > 0) {
+
+                    for (int i = 0; i < imageItems.size(); i++) {
+                        files.add(new File(imageItems.get(i).path));
+
+                        filie.put(""+i,new File(imageItems.get(i).path));
+                        Log.i("dengpao", files.get(i).toString());
+                    }
+
+                }
+
+                OkHttpUtils
+                        .post()
+                        .files("pics",filie)
+                        .url("https://wmapi.bilekang.com/index.php?m=home&v=PicAdd&a=addQuestion")
+                        //.file( new File(imageItems.get(0).path))
+                        .build()
+                        .execute(new StringCallback() {
+                            @Override
+                            public void onError(Call call, Exception e, int id) {
+                                Log.i("dengpao", "onError: "+e);
+                            }
+
+                            @Override
+                            public void onResponse(String response, int id) {
+                                Log.i("dengpao", response);
+                            }
+                        });
 
             }
         });
