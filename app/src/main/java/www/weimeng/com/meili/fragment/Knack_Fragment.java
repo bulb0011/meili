@@ -22,4 +22,6 @@ public class Knack_Fragment extends BaseFragment {
     public void initData() {
 
     }
+
+
 }

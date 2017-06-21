@@ -15,11 +15,14 @@ import com.zhy.http.okhttp.callback.StringCallback;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Hashtable;
 import java.util.Map;
 
 import okhttp3.Call;
 import www.weimeng.com.meili.R;
 import www.weimeng.com.meili.utils.GlideImageLoader;
+
+import static com.zhy.http.okhttp.OkHttpUtils.post;
 
 /**
  * Created by Administrator on 2017/6/1.
@@ -63,6 +66,8 @@ public class Add_Fragment extends BaseFragment{
             @Override
             public void onClick(View v) {
 
+                Toast.makeText(getContext(),"提交",0).show();
+
                 Map<String,File> filie=new HashMap<String, File>();
 
                 ArrayList<File> files = new ArrayList<>();
@@ -77,10 +82,21 @@ public class Add_Fragment extends BaseFragment{
 
                 }
 
+                Map<String,String>  map = new Hashtable<String, String>();
+
+                for (int x = 0; x < 10; x++) {
+
+                    map.put("1"+x,"1"+x);
+
+                }
+
                 OkHttpUtils
                         .post()
-                        .files("pics",filie)
-                        .url("https://wmapi.bilekang.com/index.php?m=home&v=PicAdd&a=addQuestion")
+                        .url("https://wmapi.bilekang.com/index.php?m=home&v=CommentDetailList&a=addComment")
+                        //.addFile("poic1","name",new File(imageItems.get(0).path))
+                       // .files("pics",filie)
+                        .params(map)
+                        .addParams("use","name")
                         //.file( new File(imageItems.get(0).path))
                         .build()
                         .execute(new StringCallback() {
@@ -93,6 +109,7 @@ public class Add_Fragment extends BaseFragment{
                             public void onResponse(String response, int id) {
                                 Log.i("dengpao", response);
                             }
+
                         });
 
             }
