@@ -2,17 +2,23 @@ package www.weimeng.com.meili.fragment;
 
 import android.content.Intent;
 import android.graphics.Color;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import www.weimeng.com.meili.R;
 import www.weimeng.com.meili.activity.GenDuo_Activity;
+import www.weimeng.com.meili.utils.MessageEvent;
 import www.weimeng.com.meili.view.FlowLayout;
 import www.weimeng.com.meili.view.NineGridTestLayout;
 import www.weimeng.com.meili.view.RollViewPager;
@@ -93,6 +99,16 @@ public class Home_Fragmet extends BaseFragment implements View.OnClickListener {
 
     @Override
     public void initData() {
+
+
+    }
+
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public  void onMessageEvent(MessageEvent event){
+
+        Toast.makeText(getContext(),"内容"+event.getMesg(),0).show();
+
+        Log.i("dengpao0011", "点击出现"+event.getMesg());
 
     }
 

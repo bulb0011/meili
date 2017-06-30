@@ -7,11 +7,14 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.RelativeLayout;
 
+import org.greenrobot.eventbus.EventBus;
+
 import www.weimeng.com.meili.fragment.Add_Fragment;
 import www.weimeng.com.meili.fragment.Expert_Fragment;
 import www.weimeng.com.meili.fragment.Home_Fragmet;
 import www.weimeng.com.meili.fragment.Knack_Fragment;
 import www.weimeng.com.meili.fragment.This_Me_Fragment;
+import www.weimeng.com.meili.utils.MessageEvent;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -27,6 +30,8 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         initView();
+
+        EventBus.getDefault().register(this);
     }
 
     void initView(){
@@ -46,6 +51,15 @@ public class MainActivity extends AppCompatActivity {
         baodian_frg = (RadioButton) findViewById(R.id. home_knack_fragment);
 
         this_frg = (RadioButton) findViewById(R.id. home_this_my_fragment);
+
+
+        findViewById(R.id. home_head_ll).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                EventBus.getDefault().post(new MessageEvent("点击"));
+            }
+        });
 
         replaceContent(new Home_Fragmet(),"HOME");
 
@@ -133,8 +147,11 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-
-
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        EventBus.getDefault().unregister(this);
+    }
 
 
 }
